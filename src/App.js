@@ -1,5 +1,6 @@
 import React from 'react';
 import TodoList from './components/TodoComponents/TodoList';
+import TodoForm from './components/TodoComponents/TodoForm';
 
 const taskList = [
   {
@@ -41,8 +42,20 @@ class App extends React.Component {
 
   addTask = event => {
     event.preventDefault();
-    const newTask = { task: this.state.task, id: Date.now(), completed: false };
-  }
+    let newTask = { 
+      task: this.state.task, 
+      id: Date.now(), 
+      completed: false 
+    };
+    this.setState({
+      tasks: [...this.state.tasks, newTask],
+      task: "",
+      id: "",
+      completed: ""
+    });
+  };
+
+  toggleCompleted = 
 
 
   render() {
@@ -50,7 +63,12 @@ class App extends React.Component {
       <div>
         <h2>Welcome to your Todo App!</h2>
         <TodoList taskList={this.state.tasks} />
+        <TodoForm 
+          addTask={this.addTask}
+          changeTask={this.changeTask}
+          task={this.state.task}
 
+        />
       </div>
       );
   }
