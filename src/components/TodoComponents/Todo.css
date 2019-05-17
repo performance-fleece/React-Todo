@@ -1,3 +1,48 @@
 .completed {
     text-decoration: line-through
 }
+
+.todo-app {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.todo-app h2 {
+    justify-content: center;
+}
+
+button.add {
+    background: lightgreen;
+}
+
+button.clear {
+    background: salmon;
+}
+
+.todo-list {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    width: 50%;
+}
+
+.todo-item {
+    display: flex;
+    flex-flow: row nowrap;
+    
+
+}
+
+.todo-item p {
+    margin: 5px 0;
+}
+
+.todo-app form {
+    margin: 5px 0;
+}
+
+.checkmark {
+    width: 20px;
+   
+}
