@@ -34,7 +34,13 @@ class App extends React.Component {
 
   changeTask = event => {
     this.setState({ [event.target.name]: event.target.value });
+    localStorage.setItem(event.target.name, event.target.value)
   };
+
+  updateInput(key, value) {
+    this.setState({ [key]: value });
+    localStorage.setItem(key, value);
+  }
 
  
 
@@ -54,6 +60,9 @@ class App extends React.Component {
       id: "",
       completed: ""
     });
+
+    localStorage.setItem("tasks", JSON.stringify(this.state.tasks));
+    localStorage.setItem("newTask", "");
   };
 
   toggleComplete = taskId => {
@@ -71,12 +80,39 @@ class App extends React.Component {
     });
   };
 
+  // clearComplete = event => {
+  //   event.preventDefault();
+  //   this.setState({
+  //     tasks: this.state.tasks.filter(task => !task.completed)
+  //   });
+  //   localStorage.setItem("tasks", JSON.stringify())
+  // };
+
   clearComplete = event => {
     event.preventDefault();
-    this.setState({
-      tasks: this.state.tasks.filter(task => !task.completed)
-    });
-  };
+    const tasks = [...this.state.tasks];
+    const updatedTasks = tasks.filter(task => !task.completed)
+    this.setState({ tasks: updatedTasks });
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+  }
+
+  componentDidMount() {
+    this.hydrateState();
+  }
+
+  hydrateState() {
+    for (let key in this.state) {
+      if (localStorage.hasOwnProperty(key)) {
+        let value=localStorage.getItem(key);
+        try {
+          value = JSON.parse(value);
+          this.setState({ [key]: value });
+        }  catch (e) {
+          this.setState({ [key]: value })
+        }
+      }
+    }
+  }
 
   render() {
     return (
