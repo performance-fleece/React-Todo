@@ -70,6 +70,13 @@ class App extends React.Component {
     });
   };
 
+  clearComplete = event => {
+    event.preventDefault();
+    this.setState({
+      tasks: this.state.tasks.filter(task => !task.completed)
+    });
+  };
+
   render() {
     return (
       <div>
@@ -82,6 +89,7 @@ class App extends React.Component {
           addTask={this.addTask}
           changeTask={this.changeTask}
           task={this.state.task}
+          clearComplete={this.clearComplete}
 
         />
       </div>
