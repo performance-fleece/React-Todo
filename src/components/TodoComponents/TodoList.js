@@ -6,12 +6,16 @@ import React from 'react';
 
 const TodoList = props => {
     return (
-            <div className="todo-item">
-                {props.taskList.map(tasks => (
-                    <Todo task={tasks.task} />
-                ))}
-            </div>
-        ) ;
+      <div className="todo-list">
+        {props.tasks.map(task => (
+          <Todo
+            key={task.id}
+            task={task}
+            toggleComplete={props.toggleComplete}
+          />
+        ))}
+      </div>
+    );
     
 
 }
